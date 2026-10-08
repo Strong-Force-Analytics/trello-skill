@@ -1,11 +1,10 @@
 {
   "name": "trello",
-  "description": "Direct Trello API access — read cards, post comments, upload files, download attachment bytes. No MCP server needed.",
-  "version": "2.0.0",
+  "description": "Direct Trello API access — read cards, post comments, upload files, download attachment bytes, drive the card lifecycle. No MCP server needed.",
+  "version": "3.0.0",
   "author": {
-    "name": "towfikul-islam",
-    "url": "https://github.com/towfikul-islam"
+    "name": "Strong Force Analytics"
   },
-  "repository": "https://github.com/towfikul-islam/trello-skill",
+  "repository": "https://github.com/Strong-Force-Analytics/trello-skill",
   "license": "MIT"
 }
