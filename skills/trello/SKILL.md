@@ -157,11 +157,11 @@ The default shape, taken from what the team actually writes:
   a risk".
 - **Fragments are correct.** Short, lowercase starts are fine. A full grammatical sentence
   on every bullet is the clearest tell of generated text.
-- **Keep domain vocabulary, cut implementation names.** 0DTE, drawdown, Express, spreads,
-  ORB — the team uses these daily and removing them destroys the meaning. What does not
+- **Keep domain vocabulary, cut implementation names.** churn, MRR, staging, SLA, backlog —
+  whatever words the team uses daily and removing them destroys the meaning. What does not
   belong: file paths, function names, endpoints. Say "it was calling something that doesn't
   exist", not the function name.
-- **Spell out units** ("240 euro", not the euro sign). No decorative symbols in comments —
+- **Spell out units** ("20 dollars", not the dollar sign). No decorative symbols in comments —
   the ✅ / 🟢 / ⬜ status marks are for descriptions and checklists only.
 - **Never pass comment/title/description text as a literal shell argument** — write it to a
   UTF-8 file and pass the path. See **"Write mechanics (non-negotiable)"** above (now enforced
@@ -202,7 +202,7 @@ situation, not the default.**
   now sends `setCover=false` as a harmless extra, but the actual fix (when the user wants
   it) is `curl -X PUT ".../boards/BOARD_ID/prefs/cardCovers?value=false&$AUTH"` — confirm
   with the user first, it's board-wide, not scoped to one card.
-  **Update 2026-09-08:** `setCover=false` did hold on a fresh upload to Data Projects
+  **Update 2026-09-08:** `setCover=false` did hold on a fresh upload to a team board
   (`idAttachmentCover` still `null` on read-back) with the board's `cardCovers` pref left at
   `true`. So the flag is not useless — it is just not a guarantee, since the earlier failure
   was a cover reappearing later rather than at upload time. Keep sending it, and keep
@@ -271,8 +271,8 @@ situation, not the default.**
   not team facing and robotic, like typical generated text. Two separate causes.
   The template belongs to a feature announcement and was being applied to every recap; the
   board's own comments are topic heading plus terse first-person fragments, and reading four
-  of them would have shown that in one call. And "no jargon" had stripped out 0DTE, Express,
-  drawdown and spreads — the exact words the team writes themselves — leaving text that said
+  of them would have shown that in one call. And "no jargon" had stripped out the team's own
+  domain terms — the exact words the team writes themselves — leaving text that said
   nothing. **Read the card's existing comments before drafting, every time.** The voice to
   match is already in the feed; it is never worth guessing at.
 
