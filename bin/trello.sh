@@ -76,7 +76,7 @@ tr_card_update() {
 # tr_card_create LIST_ID NAME_or_FILE [DESC_FILE]  -> card JSON (capture .id/.shortUrl)
 tr_card_create() {
   local n d=(); if [ -f "$2" ]; then n=(--data-urlencode "name@$2"); else _tr_guard "$2" || return 3; n=(--data-urlencode "name=$2"); fi
-  [ -n "${3:-}" ] && d=(--data-urlencode "desc@$3")
+  [ -n "${3:-}" ] && d=(--data-urlencode "desc=$(cat "$3")")
   curl -s -X POST "https://api.trello.com/1/cards?$AUTH" --data-urlencode "idList=$1" "${n[@]}" "${d[@]}"
 }
 # tr_checklist_add CARD_ID NAME  -> checklist JSON (capture .id)

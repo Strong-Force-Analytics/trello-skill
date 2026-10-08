@@ -44,21 +44,19 @@ Skills work across the Claude ecosystem — **Claude Code, Claude.ai, and the Cl
 
 ### Option A — Plugin marketplace (recommended)
 
-Add this repo as a marketplace and install in two commands from inside Claude Code:
+Install from the Strong Force Analytics marketplace, from inside Claude Code:
 
 ```
-/plugin marketplace add towfikul-islam/plugins
-/plugin install trello@towfik
+/plugin marketplace add https://github.com/Strong-Force-Analytics/claude-plugins.git
+/plugin install trello@sfa-plugins
 ```
 
 Then run `/reload-plugins`. Skills are namespaced, so invoke them as `/trello:...` or just mention Trello naturally and Claude picks up the skill.
 
-> **Community marketplace:** Submission to `anthropics/claude-plugins-community` is pending review. Once approved, you'll also be able to install with `/plugin install trello@claude-community`.
-
 ### Option B — Manual (classic)
 
 ```bash
-git clone https://github.com/towfikul-islam/trello-skill.git
+git clone https://github.com/Strong-Force-Analytics/trello-skill.git
 cd trello-skill
 mkdir -p ~/.claude/skills
 cp -r skills/trello ~/.claude/skills/trello
