@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.2
+- Setup: teams can share one Trello app; each person authorizes it for their own token instead of creating an app.
+
 ## 3.0.1
 - Generic examples in the comment-style guidance; no team-specific terms.
 
