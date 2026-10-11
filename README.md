@@ -1,5 +1,10 @@
 # trello-skill
 
+> **Retired (2026-10-12).** Strong Force Analytics now uses Trello's official MCP server
+> (`https://mcp.trello.com/v1`), with the team's `sfa` plugin covering what it can't do yet
+> (attachment upload and download, card members). This repo is archived and no longer listed in
+> the `sfa-plugins` marketplace. It still works if you install it from here.
+
 **Give Claude Code direct Trello access — no MCP server, no background process.**
 
 Download attachment bytes, upload local files, post comments, and drive cards through their whole lifecycle straight from a Claude Code session. Install in one command via the Claude plugin marketplace, or drop the files into `~/.claude/skills/` manually.
