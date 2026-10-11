@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # Trello raw-API helper. Source it:  source ~/.claude/skills/trello/trello.sh
-# Creds live in ~/.claude/.trello.env (never committed).
+# Creds live in ~/.claude/.trello.env (never committed), or in the file TRELLO_ENV_FILE names
+# (e.g. a team's shared env file; a leading ~ is expanded).
 set -euo pipefail
 
-ENV_FILE="${HOME}/.claude/.trello.env"
+ENV_FILE="${TRELLO_ENV_FILE:-${HOME}/.claude/.trello.env}"
+ENV_FILE="${ENV_FILE/#\~/$HOME}"
 [ -f "$ENV_FILE" ] || { echo "MISSING $ENV_FILE — fill creds first" >&2; return 1 2>/dev/null || exit 1; }
 set -a; source "$ENV_FILE"; set +a
 case "${TRELLO_KEY:-}" in ""|PUT_YOUR_KEY_HERE) echo "TRELLO_KEY not set in $ENV_FILE" >&2; return 1 2>/dev/null || exit 1;; esac

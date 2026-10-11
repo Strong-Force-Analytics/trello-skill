@@ -93,6 +93,9 @@ cp .trello.env.example ~/.claude/.trello.env
 # then edit ~/.claude/.trello.env and paste your TRELLO_KEY and TRELLO_TOKEN
 ```
 
+Keeping your credentials in one file with other tools? Set `TRELLO_ENV_FILE` to that file's path
+(for example in the `env` block of `~/.claude/settings.json`) and the helper reads it instead.
+
 ### 4. Add your member ID
 
 With the key and token set, fetch your member ID and paste it into the same file:
