@@ -9,7 +9,7 @@ Helper for the user's Trello via curl. Token-lean (responses trimmed with `field
 
 ## Setup (once)
 Creds live in `~/.claude/.trello.env` — three variables:
-- `TRELLO_KEY`, `TRELLO_TOKEN` — get both at https://trello.com/power-ups/admin/new (see the repo README for the full walkthrough with screenshots).
+- `TRELLO_KEY`, `TRELLO_TOKEN` — get both at https://trello.com/power-ups/admin/new (see the repo README for the full walkthrough with screenshots). If the user's team has a shared Trello app, don't create a new one: use the team's key and authorize it for a personal token (README step 2, "Using this with a team?").
 - `TRELLO_MEMBER_ID` — your member ID (used by `tr_mine` / `tr_mine_board`). After `TRELLO_KEY`/`TRELLO_TOKEN` are set, run `source "$(command -v trello.sh 2>/dev/null || echo "${HOME}/.claude/skills/trello/trello.sh")" && tr_get "/1/members/me?fields=id,username"` and paste the `id` back into the env file.
 
 Copy `.trello.env.example` from the repo to `~/.claude/.trello.env` and fill it in. If placeholders are unfilled, tell the user to fill that file. **Never print the token.**

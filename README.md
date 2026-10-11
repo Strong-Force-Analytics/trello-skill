@@ -66,6 +66,8 @@ You should now have `~/.claude/skills/trello/SKILL.md` and `~/.claude/skills/tre
 
 ### 2. Get your Trello API key + token (both options)
 
+> **Using this with a team?** If your team already has a shared Trello app, you don't need to create one. Put the team's API key in `TRELLO_KEY`, open `https://trello.com/1/authorize?key=<TEAM_KEY>&name=<APP_NAME>&scope=read,write&expiration=never&response_type=token`, click **Allow**, and copy the token. Then skip to step 3. The token is still yours, so everything the skill does shows up as you. One shared app keeps the team's workspace from filling up with one app per person.
+
 Open **https://trello.com/power-ups/admin/new** and fill in the **New App** form. Only *App name* and *Workspace* matter for personal use; **Email**, **Support contact**, **Author**, and the optional **Iframe connector URL** can be anything or left blank. Click **Create**.
 
 ![New App form](assets/01-new-app.png)
