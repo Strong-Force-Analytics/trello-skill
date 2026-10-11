@@ -79,14 +79,11 @@ instead of copying these. Three rules, all of which fail SILENTLY:
    Trello JSON into python on Windows drops emoji to a zero count and reads as "the emoji
    never landed" when they landed fine. `Invoke-RestMethod` + `-match` on the line shows the
    truth.
-4. **Emoji/non-ASCII in a description or checkItem -> PowerShell, not `tr_card_update`.**
-   The `desc=FILE` path reads the file with `cat` into a bash variable and passes it through
-   `--data-urlencode`, i.e. still argv — fine for ASCII, mangles emoji. Use:
-   ```powershell
-   $uri  = "https://api.trello.com/1/cards/$sl`?key=$key&token=$token"
-   $body = "desc=$([uri]::EscapeDataString((Get-Content $file -Raw)))"
-   Invoke-RestMethod -Uri $uri -Method Put -Body $body -ContentType "application/x-www-form-urlencoded"
-   ```
+4. **Non-ASCII goes in a FILE, and the helpers send the file as UTF-8.** Every text helper
+   (`tr_comment`, `tr_comment_update`, `tr_card_update`, `tr_card_create`, `tr_checkitem_add`,
+   `tr_checkitem_set`) sends a file with curl's own `key@FILE` reader, so emoji, curly quotes
+   and em-dashes land intact on Windows too. PowerShell `Invoke-RestMethod` is only a fallback
+   if a helper still misbehaves.
 
 ## Status vocabulary (team convention)
 
@@ -229,8 +226,11 @@ situation, not the default.**
   PowerShell strings are UTF-16 internally but `Invoke-RestMethod` encodes the body as
   UTF-8 bytes — no argv mangling. Multiple cards can loop in one PowerShell call (no
   burst-throttle issue for PUTs from PS, unlike Bash).
-- **`tr_comment`/`tr_card_update` file paths now use `cat` internally, not curl `@file`.** MSYS curl on Windows exits 26 when given a file path via `--data-urlencode "key@/path"` (can't resolve MSYS paths for file reads). Fixed in trello.sh: both functions now read content with `cat "$file"` into a bash variable and pass `--data-urlencode "key=$var"`. Pure ASCII content goes through fine. Non-ASCII still needs the PowerShell workaround (variable mangling through argv on Windows cp1252).
-- **`tr_card_create` DESC_FILE had the same `@file` bug** (curl exit 26, card not created). Fixed 2026-10-01: it now reads the desc with `cat` like `tr_comment`. ASCII only; emoji in a desc still need the PowerShell path.
+- **File text is sent with `key@FILE`, not `$(cat)` (fixed 2026-10-12).** The earlier `cat` fix
+  for curl exit 26 put the text back on argv, so non-ASCII went out as cp1252 and Trello stored
+  the whole description still %-encoded (`%0A`, `%2A`, ...). Now `_tr_field` copies the file
+  (trailing newlines dropped), converts the path with `cygpath -m` (a `/c/` path is what caused
+  exit 26) and lets curl read the bytes. Verified on a live card: stored text matched the file.
 - **`tr_card_checklists CARD_ID` added.** Previously had to hand-roll curl to get checklist IDs from a card. Use it to get CHECKLIST_ID before calling `tr_checkitems`. Asymmetry to remember: `tr_checkitems` takes CHECKLIST_ID; `tr_checkitem_set` takes CARD_ID.
 - **Batched writes fail — do ONE write per Bash invocation.** Ticking many checkItems
   (or any loop of PUT/POST) in a single `source trello.sh && for ... tr_checkitem_set ...`

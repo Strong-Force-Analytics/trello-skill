@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.3
+- Text helpers send files with curl's `key@FILE` (path via `cygpath -m`), so non-ASCII stays UTF-8 on Windows. Before, a description with curly quotes or em-dashes could be stored still %-encoded.
+
 ## 3.0.2
 - Setup: teams can share one Trello app; each person authorizes it for their own token instead of creating an app.
 

@@ -1,7 +1,7 @@
 {
   "name": "trello",
   "description": "Direct Trello API access — read cards, post comments, upload files, download attachment bytes, drive the card lifecycle. No MCP server needed.",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "author": {
     "name": "Strong Force Analytics"
   },
